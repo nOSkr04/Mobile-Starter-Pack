@@ -13,24 +13,20 @@ export enum NavigationRoutes {
   TestSheet = "TestSheet",
   // Screen
   TestScreen = "TestScreen",
+  LoginScreen = "LoginScreen"
 
 }
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<BottomTabParamList> | undefined;
   TestScreen: undefined;
-
+  LoginScreen: undefined
 };
 
 export type BottomTabParamList = {
   HomeTab: undefined;
-  AuthTab: undefined;
-  BasketTab: undefined;
-  ChatTab: undefined;
-  ReelTab: undefined;
-  OtpTab: undefined;
   ProfileTab: undefined;
-  OrderProductTab: undefined;
+
 };
 
 export type BottomSheetParamList = {
