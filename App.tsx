@@ -12,6 +12,7 @@ import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { SplashAnimationScreen } from "./src/screens/splash-animation";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,10 +48,12 @@ export default function App() {
           <View   style={styles.container}>
             <ThemeProvider value={colorScheme === "dark" ? DarkTheme: DefaultTheme} >
               <GestureHandlerRootView style={styles.container}>
-                <SafeAreaProvider>
-                  <StatusBar style="dark" />
-                  <NavigationContainer />
-                </SafeAreaProvider>
+                <BottomSheetModalProvider>
+                  <SafeAreaProvider>
+                    <StatusBar style="dark" />
+                    <NavigationContainer />
+                  </SafeAreaProvider>
+                </BottomSheetModalProvider>
               </GestureHandlerRootView>
             </ThemeProvider>
           </View>

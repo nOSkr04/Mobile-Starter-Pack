@@ -1,19 +1,21 @@
-import { KeyboardAvoidingView, Platform, StyleSheet, } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, useColorScheme, } from "react-native";
 import React, { memo, useCallback, useState, } from "react";
 import { ThemedBackButton } from "../../components/widgets/theme-back-button";
 import { ScrollView } from "../../components/widgets/themed-scrollview";
 import { ThemedAppBar } from "../../components/widgets/themed-app-bar";
 import { View } from "../../components/widgets/themed-view";
-import { ThemedLogo } from "../../components/widgets/themed-logo";
 import { Text } from "../../components/widgets/themed-text";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { PhoneForm } from "../../components/auth/phone-form";
 import Button from "../../components/widgets/themed-button";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationRoutes } from "../../navigation/types";
+import { PasswordIcon } from "../../assets/icons/password";
+import { Colors } from "../../constants/colors";
+import { PasswordForm } from "../../components/auth/password-form";
 
-const RegisterPhoneScreen = memo(() => {
+const PasswordScreen = memo(() => {
   const [loading, setLoading] = useState(false);
+  const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const {
     handleSubmit,
@@ -32,30 +34,30 @@ const RegisterPhoneScreen = memo(() => {
   }, [navigation, setError]);
   return (
     <>
-      <ThemedAppBar left={<ThemedBackButton />} midText="Бүртгүүлэх" />
+      <ThemedAppBar left={<ThemedBackButton />} midText="Нууц үг" />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.container}
       >
         <ScrollView keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled" style={styles.container}  >
           <View style={styles.midLogo}>
-            <ThemedLogo size={80} />
+            <PasswordIcon color={colorScheme === "dark" ? Colors.defaultColor.white : Colors.defaultColor.primary} />
           </View>
-          <Text size={20} style={styles.title} type="SemiBold">Хаяг үүсгэх</Text>
+          <Text size={20} style={styles.title} type="SemiBold">Нууц үг үүсгэх</Text>
           <View style={styles.h8} />
-          <Text style={styles.title}>Та өөрийн утасны дугаарыг оруулж бүртгэл үүсгэнэ үү</Text>
+          <Text style={styles.title}>Цаашид нэвтрэхдээ ашиглах нууц үгээ оруулна уу</Text>
           <View style={styles.h32} />
-          <PhoneForm control={control} errors={errors} />
+          <PasswordForm control={control} errors={errors} />
+          <Button label="Болсон" loading={loading} onPress={handleSubmit(onSubmit)} style={styles.button} />
         </ScrollView>
-        <Button label="Бүртгүүлэх" loading={loading} onPress={handleSubmit(onSubmit)} style={styles.button} />
       </KeyboardAvoidingView>
     </>
   );
 });
 
-RegisterPhoneScreen.displayName = "RegisterPhoneScreen";
+PasswordScreen.displayName = "PasswordScreen";
 
-export { RegisterPhoneScreen };
+export { PasswordScreen };
 
 const styles = StyleSheet.create({
   container: {

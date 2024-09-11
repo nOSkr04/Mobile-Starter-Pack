@@ -1,18 +1,17 @@
 import { KeyboardAvoidingView, Platform, StyleSheet, } from "react-native";
-import React, { memo, useCallback, useState, } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { ThemedBackButton } from "../../components/widgets/theme-back-button";
-import { ScrollView } from "../../components/widgets/themed-scrollview";
 import { ThemedAppBar } from "../../components/widgets/themed-app-bar";
-import { View } from "../../components/widgets/themed-view";
+import { ScrollView } from "../../components/widgets/themed-scrollview";
 import { ThemedLogo } from "../../components/widgets/themed-logo";
+import { View } from "../../components/widgets/themed-view";
 import { Text } from "../../components/widgets/themed-text";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { PhoneForm } from "../../components/auth/phone-form";
-import Button from "../../components/widgets/themed-button";
+import {  OtpForm } from "../../components/auth/otp-form";
 import { useNavigation } from "@react-navigation/native";
+import { useForm,  } from "react-hook-form";
 import { NavigationRoutes } from "../../navigation/types";
 
-const RegisterPhoneScreen = memo(() => {
+const OtpVerifyScreen = memo(() => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const {
@@ -23,16 +22,18 @@ const RegisterPhoneScreen = memo(() => {
   } = useForm();
 
 
-  const onSubmit: SubmitHandler<FieldValues> = useCallback(async (data) => {
+  const onSubmit= useCallback(async (data:any) => {
     setLoading(true);
     setError("root", { "message": "" });
     console.log(data);
     setLoading(false);
-    navigation.navigate(NavigationRoutes.OtpVerifyScreen);
+    navigation.navigate(NavigationRoutes.CreateProfileScreen);
   }, [navigation, setError]);
+
+  console.log(loading);
   return (
     <>
-      <ThemedAppBar left={<ThemedBackButton />} midText="Бүртгүүлэх" />
+      <ThemedAppBar left={<ThemedBackButton />} midText="Баталгаажуулалт" />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.container}
@@ -41,21 +42,21 @@ const RegisterPhoneScreen = memo(() => {
           <View style={styles.midLogo}>
             <ThemedLogo size={80} />
           </View>
-          <Text size={20} style={styles.title} type="SemiBold">Хаяг үүсгэх</Text>
+          <Text size={20} style={styles.title} type="SemiBold">Дугаар баталгаажуулалт</Text>
           <View style={styles.h8} />
-          <Text style={styles.title}>Та өөрийн утасны дугаарыг оруулж бүртгэл үүсгэнэ үү</Text>
+          <Text style={styles.title}>Таны 9988**** дугаар луу илгээсэн 6 оронтой
+            тоог оруулна уу.</Text>
           <View style={styles.h32} />
-          <PhoneForm control={control} errors={errors} />
+          <OtpForm control={control} errors={errors} onSubmit={handleSubmit(onSubmit)}  />
         </ScrollView>
-        <Button label="Бүртгүүлэх" loading={loading} onPress={handleSubmit(onSubmit)} style={styles.button} />
       </KeyboardAvoidingView>
     </>
   );
 });
 
-RegisterPhoneScreen.displayName = "RegisterPhoneScreen";
+OtpVerifyScreen.displayName="OtpVerifyScreen";
 
-export { RegisterPhoneScreen };
+export { OtpVerifyScreen };
 
 const styles = StyleSheet.create({
   container: {
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign       : "center",
-    marginHorizontal: 90
+    marginHorizontal: 55
   },
   h8: {
     height: 8
@@ -75,8 +76,4 @@ const styles = StyleSheet.create({
   h32: {
     height: 32
   },
-  button: {
-    marginHorizontal: 16,
-    marginBottom    : 16
-  }
 });

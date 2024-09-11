@@ -27,7 +27,7 @@ const SheetBackdrop = React.memo(
       () => [
         styles.container,
         {
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.defaultColor.black,
         },
         opacityStyle,
       ],
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius : 10,
     borderTopRightRadius: 10,
     overflow            : "hidden",
-    backgroundColor     : Colors.primary,
+    backgroundColor     : Colors.defaultColor.black,
   },
 });
 

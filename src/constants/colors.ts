@@ -2,12 +2,13 @@ const tintColorLight = "#0a7ea4";
 const tintColorDark = "#fff";
 export const Colors = {
   defaultColor: {
-    primary  : "#1A2482",
-    danger   : "#FF3B30",
-    white    : "#fff",
-    black    : "#000",
-    secondary: "rgba(255, 255, 255, 0.10)",
-    third    : "rgba(26, 36, 130, 0.10)"
+    primary    : "#1A2482",
+    danger     : "#FF3B30",
+    white      : "#fff",
+    black      : "#0C0D0C",
+    secondary  : "rgba(255, 255, 255, 0.10)",
+    third      : "rgba(26, 36, 130, 0.10)",
+    transparent: "transparent"
   },
   light: {
     text           : "#11181C",

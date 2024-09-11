@@ -2,6 +2,7 @@ import { StyleSheet, } from "react-native";
 import React, { memo } from "react";
 import { View } from "./themed-view";
 import { Text } from "./themed-text";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = {
   left?: React.ReactNode;
@@ -11,8 +12,10 @@ type Props = {
 }
 
 const ThemedAppBar = memo(({ left,mid, right, midText }: Props) => {
+  const sf = useSafeAreaInsets();
+  const paddingTop = sf.top + 8;
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, { paddingTop }]}>
       <View style={styles.left}>
         {left}
       </View>
@@ -38,24 +41,19 @@ export { ThemedAppBar };
 
 const styles = StyleSheet.create({
   root: {
-    flexDirection  : "row",
-    alignItems     : "center",
-    height         : 56,
-    backgroundColor: "red"
+    flexDirection: "row",
+    alignItems   : "center",
+    paddingBottom: 8,
   },
   left: {
-    flex          : 1,
-    justifyContent: "flex-start",
-    alignSelf     : "flex-start"
+    flex: 1,
   },
   mid: {
-    alignSelf     : "center",
     flex          : 2,
     justifyContent: "center",
     alignItems    : "center"
   },
   right: {
-    alignItems: "flex-end",
-    flex      : 1
+    flex: 1,
   }
 });

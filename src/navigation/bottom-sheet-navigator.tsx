@@ -4,7 +4,6 @@ import React from "react";
 import { SheetBackdrop } from "../components/sheets/back-drop";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RootStackNavigator } from "./root-stack-navigator";
-import { TestSheet } from "../sheets/test";
 
 const BottomSheet = createBottomSheetNavigator<BottomSheetParamList>();
 
@@ -18,16 +17,16 @@ const BottomSheetNavigator = () => {
         component={RootStackNavigator}
         name={NavigationRoutes.RootStackParamList}
       />
-      <Screen
-        component={TestSheet}
-        name={NavigationRoutes.TestSheet}
+      {/* <Screen
+        component={SelectSheet}
+        name={NavigationRoutes.SelectSheet}
         options={{
           backdropComponent: SheetBackdrop,
           snapPoints       : ["90%"],
           index            : 1,
           topInset         : insets.top,
         }}
-      />
+      /> */}
     </Navigator>
   );
 };

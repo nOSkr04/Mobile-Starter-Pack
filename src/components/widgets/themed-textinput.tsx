@@ -1,7 +1,7 @@
 import { TextInput as DefaultTextInput, StyleSheet, type TextInputProps, useColorScheme, } from "react-native";
 import { useThemeColor } from "../../hooks/useThemeColor";
 import React, { ReactNode, useCallback, useState } from "react";
-import { Colors,  } from "../../constants/colors";
+import { Colors, } from "../../constants/colors";
 import { View } from "./themed-view";
 import { Text } from "./themed-text";
 export type ThemedTextInputProps = TextInputProps & {
@@ -52,9 +52,13 @@ const TextInput = ({ style, lightColor, darkColor, prefix, suffix, error, label,
           : <View style={styles.w16} />
         }
         <DefaultTextInput
+          autoCapitalize="none"
+          autoComplete="off"
+          autoCorrect={false}
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
           placeholderTextColor={error ? Colors.defaultColor.danger : placeholderColor}
+          spellCheck={false}
           style={[
             { color },
             styles.container,

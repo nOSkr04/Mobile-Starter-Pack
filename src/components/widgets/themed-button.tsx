@@ -1,49 +1,60 @@
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, useColorScheme, } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps,useColorScheme } from "react-native";
 import React from "react";
 import { Colors } from "../../constants/colors";
+import { View } from "./themed-view";
 
-type Props = {
+type Props = TouchableOpacityProps & {
   onPress?: () => void;
   label?: string;
   type?: "primary" | "secondary";
-  loading?: boolean
+  loading?: boolean;
 }
 
-const Button = ({ onPress, label, loading, type }: Props) => {
+const Button = ({ style,onPress, label, loading, type,  ...otherProps  }: Props) => {
   const colorScheme = useColorScheme();
   if (colorScheme === "dark") {
     if (type === "secondary") {
       return (
-        <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.secondary }]}>
-          {loading ? <ActivityIndicator color={Colors.dark.text} /> :
-          <Text style={[styles.title, { color: Colors.defaultColor.white } ]}  >{label}</Text>
+        <View>
+          <TouchableOpacity  onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.secondary }, style]} 
+        {...otherProps}
+        >
+            {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+            <Text style={[styles.title, { color: Colors.defaultColor.white } ]}  >{label}</Text>
           }
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       );
     }
     return (
-      <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.white }]}>
-        {loading ? <ActivityIndicator color={Colors.dark.text} /> :
-        <Text style={[styles.title, { color: Colors.defaultColor.black }]}  >{label}</Text>
+      <View>
+        <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.white },style]} {...otherProps}>
+          {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+          <Text style={[styles.title, { color: Colors.defaultColor.black }]}  >{label}</Text>
         }
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     );
   }
   if(type ==="secondary"){
     return(
-      <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.third }]}>
-        {loading ? <ActivityIndicator color={Colors.dark.text} /> :
-        <Text style={[styles.title, { color: Colors.defaultColor.primary }]}  >{label}</Text>
+      <View>
+        <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.third },style]} {...otherProps}>
+          {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+          <Text style={[styles.title, { color: Colors.defaultColor.primary }]}  >{label}</Text>
       }
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     );
   }
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.primary }]}>
-      {loading ? <ActivityIndicator color={Colors.dark.text} /> :
-      <Text style={[styles.title, { color: Colors.defaultColor.white }]}  >{label}</Text>
+    <View>
+      <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.primary },style]} {...otherProps}>
+        {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+        <Text style={[styles.title, { color: Colors.defaultColor.white }]}  >{label}</Text>
       }
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

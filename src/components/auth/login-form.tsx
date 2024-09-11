@@ -37,7 +37,7 @@ const LoginForm = memo(({ control, errors, onSubmit, loading }: Props) => {
         render={({ field: { onChange, value, } }) => (
           <TextInput
             error={errors.username?.message}
-            keyboardType="phone-pad"
+            // keyboardType="phone-pad"
             label="Утас"
             onChangeText={onChange}
             placeholder="Утасны дугаар"

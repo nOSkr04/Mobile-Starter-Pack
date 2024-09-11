@@ -8,21 +8,26 @@ export enum NavigationRoutes {
   // Tabs
   HomeTab = "HomeTab",
   ProfileTab = "ProfileTab",
+  MapTab = "MapTab",
+  MarketTab = "MarketTab",
+  CouponTab = "CouponTab",
 
   //   Sheets
-  TestSheet = "TestSheet",
   // Screen
-  TestScreen = "TestScreen",
   LoginScreen = "LoginScreen",
-  RegisterPhoneScreen="RegisterPhoneScreen"
-
+  RegisterPhoneScreen = "RegisterPhoneScreen",
+  OtpVerifyScreen = "OtpVerifyScreen",
+  CreateProfileScreen = "CreateProfileScreen",
+  PasswordScreen = "PasswordScreen",
 }
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<BottomTabParamList> | undefined;
-  TestScreen: undefined;
   LoginScreen: undefined;
-  RegisterPhoneScreen: undefined
+  RegisterPhoneScreen: undefined;
+  OtpVerifyScreen: undefined;
+  CreateProfileScreen: undefined;
+  PasswordScreen: undefined
 };
 
 export type BottomTabParamList = {
@@ -33,8 +38,14 @@ export type BottomTabParamList = {
 
 export type BottomSheetParamList = {
   RootStackParamList: undefined;
-  TestSheet: undefined;
-
+  // SelectSheet: {
+  //   values: {
+  //     label: string;
+  //     value: string;
+  //   }[];
+  //   onChange: (...event: any[]) => void
+  // };
+ 
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -46,7 +57,7 @@ export type BottomSheetScreenProps<T extends keyof BottomSheetParamList> =
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
-    interface RootParamList extends BottomSheetParamList {}
+    interface RootParamList extends RootStackParamList { }
+    interface RootParamList extends BottomSheetParamList { }
   }
 }

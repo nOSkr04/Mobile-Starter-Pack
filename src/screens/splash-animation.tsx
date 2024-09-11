@@ -1,9 +1,12 @@
-import { StyleSheet,  View } from "react-native";
-import React, { memo,   } from "react";
+import { StyleSheet, useColorScheme, } from "react-native";
+import React, { memo, } from "react";
 import Animated, { Easing, Keyframe } from "react-native-reanimated";
 import { LogoIcon } from "../assets/icons/logo";
+import { View } from "../components/widgets/themed-view";
+import { Colors } from "../constants/colors";
 
-const SplashAnimationScreen = memo(({ onFinish }: {onFinish: () => void}) => {
+const SplashAnimationScreen = memo(({ onFinish }: { onFinish: () => void }) => {
+  const colorScheme = useColorScheme();
   const enteringAnimation = new Keyframe({
     0: {
       transform: [
@@ -36,16 +39,16 @@ const SplashAnimationScreen = memo(({ onFinish }: {onFinish: () => void}) => {
   setTimeout(() => {
     onFinish();
   }, 1400);
-    return (
-      <View style={styles.root}>
-        <Animated.View entering={enteringAnimation}>
-          <LogoIcon      />
-        </Animated.View>
-      </View>
-    );
-  });
+  return (
+    <View style={styles.root}>
+      <Animated.View entering={enteringAnimation}>
+        <LogoIcon color={colorScheme === "dark" ? Colors.defaultColor.white : Colors.defaultColor.primary} />
+      </Animated.View>
+    </View>
+  );
+});
 
-  SplashAnimationScreen.displayName="SplashAnimationScreen";
+SplashAnimationScreen.displayName = "SplashAnimationScreen";
 
 export { SplashAnimationScreen };
 
