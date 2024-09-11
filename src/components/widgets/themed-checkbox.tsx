@@ -1,18 +1,20 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, useColorScheme } from "react-native";
 import React from "react";
 import { TickIcon } from "../../assets/icons/tick";
-import { primaryColor } from "../../constants/colors";
+import { Colors } from "../../constants/colors";
 
 const CheckBox = ({ checked }: { checked?: boolean }) => {
+  const colorScheme = useColorScheme();
+  const backgroundColor = colorScheme === "dark" ? Colors.defaultColor.white : Colors.defaultColor.primary;
   if (checked) {
     return (
-      <View style={styles.container} >
-        <TickIcon />
+      <View style={[styles.container, { backgroundColor }]} >
+        <TickIcon color={colorScheme === "dark" ? Colors.defaultColor.black : Colors.defaultColor.white} />
       </View>
     );
   }
   return (
-    <View style={styles.container} />
+    <View style={[styles.container, { backgroundColor }]} />
   );
 };
 
@@ -20,13 +22,12 @@ export default CheckBox;
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius   : 8,
-    backgroundColor: primaryColor,
-    width          : 20,
-    height         : 20,
-    alignItems     : "center",
-    justifyContent : "center",
-    borderWidth    : 1
+    borderRadius  : 8,
+    width         : 20,
+    height        : 20,
+    alignItems    : "center",
+    justifyContent: "center",
+    borderWidth   : 1
 
   }
 });

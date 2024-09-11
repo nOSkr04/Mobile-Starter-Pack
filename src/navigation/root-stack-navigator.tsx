@@ -10,6 +10,7 @@ import { IAuth } from "../interfaces/auth";
 import { AuthApi } from "../api";
 import { authLogout, authMe } from "../store/auth-slice";
 import { LoginScreen } from "../screens/auth/login";
+import { RegisterPhoneScreen } from "../screens/auth/register-phone";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const { Navigator, Screen } = Stack;
@@ -54,6 +55,7 @@ const RootStackNavigator = () => {
     :
       <>
         <Screen component={LoginScreen} name={NavigationRoutes.LoginScreen} />
+        <Screen component={RegisterPhoneScreen} name={NavigationRoutes.RegisterPhoneScreen} />
       </> 
     }
     </Navigator>

@@ -6,19 +6,38 @@
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./src/assets/splashing.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+        "image": "./src/assets/splashing.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff",
+        "dark": {
+          "image": "./src/assets/adaptive-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#292F3F"
+        }
+      },
+      "bundleIdentifier": "mn.bishrelt.loyalty"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "splash": {
+        "image": "./src/assets/splashing.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff",
+        "dark": {
+          "image": "./src/assets/adaptive-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#292F3F"
+        }
       }
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

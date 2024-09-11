@@ -1,7 +1,7 @@
-import { TextInput as DefaultTextInput, StyleSheet, type TextInputProps, } from "react-native";
+import { TextInput as DefaultTextInput, StyleSheet, type TextInputProps, useColorScheme, } from "react-native";
 import { useThemeColor } from "../../hooks/useThemeColor";
-import React, { ReactNode, useState } from "react";
-import { dangerColor, primaryColor } from "../../constants/colors";
+import React, { ReactNode, useCallback, useState } from "react";
+import { Colors,  } from "../../constants/colors";
 import { View } from "./themed-view";
 import { Text } from "./themed-text";
 export type ThemedTextInputProps = TextInputProps & {
@@ -16,11 +16,18 @@ export type ThemedTextInputProps = TextInputProps & {
 
 const TextInput = ({ style, lightColor, darkColor, prefix, suffix, error, label, ...otherProps }: ThemedTextInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const colorScheme = useColorScheme();
 
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "background");
+  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, "textinput");
   const borderColor = useThemeColor({ light: lightColor, dark: darkColor }, "border");
   const placeholderColor = useThemeColor({ light: lightColor, dark: darkColor }, "placeholder");
-
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const focused = useCallback(() => {
+    if (isFocused) {
+      return colorScheme === "dark" ? styles.focused2 : styles.focused;
+    }
+    return undefined;
+  }, [colorScheme, isFocused]);
   return (
     <>
       {label &&
@@ -32,10 +39,9 @@ const TextInput = ({ style, lightColor, darkColor, prefix, suffix, error, label,
       }
       <View style={[
         styles.root,
-      {  borderColor },
-      error ? { borderColor: dangerColor } : undefined,
-      isFocused && styles.focused,
-
+        { borderColor, backgroundColor },
+        error ? { borderColor: Colors.defaultColor.danger } : undefined,
+        focused(),
       ]}>
         {prefix ?
           <>
@@ -48,9 +54,9 @@ const TextInput = ({ style, lightColor, darkColor, prefix, suffix, error, label,
         <DefaultTextInput
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
-          placeholderTextColor={error ? dangerColor : placeholderColor}
+          placeholderTextColor={error ? Colors.defaultColor.danger : placeholderColor}
           style={[
-            { backgroundColor, },
+            { color },
             styles.container,
             style,
           ]}
@@ -87,9 +93,13 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     fontSize         : 16,
     fontFamily       : "Inter_Regular",
+    verticalAlign    : "middle",
   },
   focused: {
-    borderColor: primaryColor
+    borderColor: Colors.defaultColor.primary
+  },
+  focused2: {
+    borderColor: Colors.dark.text
   },
   w16: {
     width: 16,
@@ -103,7 +113,7 @@ const styles = StyleSheet.create({
     marginBottom : 6
   },
   error: {
-    color    : dangerColor,
+    color    : Colors.defaultColor.danger,
     textAlign: "right",
     marginTop: 6
   },

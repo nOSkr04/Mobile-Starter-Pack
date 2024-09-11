@@ -13,14 +13,16 @@ export enum NavigationRoutes {
   TestSheet = "TestSheet",
   // Screen
   TestScreen = "TestScreen",
-  LoginScreen = "LoginScreen"
+  LoginScreen = "LoginScreen",
+  RegisterPhoneScreen="RegisterPhoneScreen"
 
 }
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<BottomTabParamList> | undefined;
   TestScreen: undefined;
-  LoginScreen: undefined
+  LoginScreen: undefined;
+  RegisterPhoneScreen: undefined
 };
 
 export type BottomTabParamList = {

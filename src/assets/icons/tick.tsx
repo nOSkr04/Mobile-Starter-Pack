@@ -1,8 +1,9 @@
 import React from "react";
 import Svg, { Path } from "react-native-svg";
+import { Colors } from "../../constants/colors";
 
 const TickIcon = ({
-  color = "white",
+  color = Colors.defaultColor.white,
   size = 24,
 }: {
   color?: string;

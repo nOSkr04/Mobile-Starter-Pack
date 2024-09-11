@@ -28,8 +28,6 @@ export default function App() {
     "ExtraBold": require("./src/assets/fonts/Inter_ExtraBold.ttf"),
   });
 
-  console.log(fontsLoaded, "SEE", fontError);
-
   useEffect(() => {
     if(fontError || fontsLoaded){
       setAppIsReady(true);

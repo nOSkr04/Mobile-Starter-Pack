@@ -7,9 +7,9 @@ import { authLogin } from "../../store/auth-slice";
 import { useForm } from "react-hook-form";
 import { ScrollView } from "../../components/widgets/themed-scrollview";
 import { LoginForm } from "../../components/auth/login-form";
-import { LogoIcon } from "../../assets/icons/logo";
 import { Text } from "../../components/widgets/themed-text";
 import { useThemeColor } from "../../hooks/useThemeColor";
+import { ThemedLogo } from "../../components/widgets/themed-logo";
 const LoginScreen = memo(() => {
   const sf = useSafeAreaInsets();
   const dispatch = useDispatch();
@@ -53,6 +53,7 @@ const LoginScreen = memo(() => {
       backgroundColor,
     };
   }, [backgroundColor, sf.top]);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -60,7 +61,7 @@ const LoginScreen = memo(() => {
     >
       <ScrollView keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled" style={styles.container}  >
         <View style={styles.midIcon}>
-          <LogoIcon size={100}  />
+          <ThemedLogo size={100}  />
         </View>
         <Text size={24} style={styles.title} type="SemiBold">BISHRELT LOYALTY</Text>
         <LoginForm control={control} errors={errors} loading={loading} onSubmit={handleSubmit(onSubmit)} />
@@ -79,11 +80,12 @@ const styles = StyleSheet.create({
   },
   midIcon: {
     alignSelf: "center",
-    marginTop: 48
+    marginTop: 60
   },
   title: {
-    textAlign     : "center",
-    marginVertical: 32
+    textAlign   : "center",
+    marginTop   : 24,
+    marginBottom: 32
   }
 });
 

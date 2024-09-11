@@ -1,6 +1,6 @@
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity,  } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, useColorScheme, } from "react-native";
 import React from "react";
-import { Colors, primaryColor } from "../../constants/colors";
+import { Colors } from "../../constants/colors";
 
 type Props = {
   onPress?: () => void;
@@ -9,11 +9,39 @@ type Props = {
   loading?: boolean
 }
 
-const Button = ({ onPress, label, loading }: Props) => {
+const Button = ({ onPress, label, loading, type }: Props) => {
+  const colorScheme = useColorScheme();
+  if (colorScheme === "dark") {
+    if (type === "secondary") {
+      return (
+        <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.secondary }]}>
+          {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+          <Text style={[styles.title, { color: Colors.defaultColor.white } ]}  >{label}</Text>
+          }
+        </TouchableOpacity>
+      );
+    }
+    return (
+      <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.white }]}>
+        {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+        <Text style={[styles.title, { color: Colors.defaultColor.black }]}  >{label}</Text>
+        }
+      </TouchableOpacity>
+    );
+  }
+  if(type ==="secondary"){
+    return(
+      <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.third }]}>
+        {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+        <Text style={[styles.title, { color: Colors.defaultColor.primary }]}  >{label}</Text>
+      }
+      </TouchableOpacity>
+    );
+  }
   return (
-    <TouchableOpacity onPress={onPress} style={styles.root}>
-      {loading ? <ActivityIndicator color={Colors.dark.text} /> : 
-      <Text style={styles.title}>{label}</Text>
+    <TouchableOpacity onPress={onPress} style={[styles.root, { backgroundColor: Colors.defaultColor.primary }]}>
+      {loading ? <ActivityIndicator color={Colors.dark.text} /> :
+      <Text style={[styles.title, { color: Colors.defaultColor.white }]}  >{label}</Text>
       }
     </TouchableOpacity>
   );
@@ -23,15 +51,13 @@ export default Button;
 
 const styles = StyleSheet.create({
   root: {
-    padding        : 16,
     borderRadius   : 12,
     alignItems     : "center",
     justifyContent : "center",
-    backgroundColor: primaryColor
+    paddingVertical: 15.5
   },
   title: {
-    color     : Colors.dark.text,
     fontFamily: "SemiBold",
-    
+    fontSize  : 16,
   }
 });
